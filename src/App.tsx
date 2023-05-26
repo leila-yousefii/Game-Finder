@@ -1,13 +1,32 @@
-import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
-import './App.css'
+import {
+  Grid,
+  GridItem,
+  Show,
+  
+} from "@chakra-ui/react";
+import "./App.css";
+import NavBar from "./Components/NavBar";
 
 function App() {
-
   return (
-<Skeleton startColor='pink.500' endColor='orange.500' height='20px' />
-
-    
-  )
+    <>
+      <Grid
+        templateAreas={{ base: `"nav " " main"`, lg: `"nav nav" "aside main"` }}
+      >
+        <GridItem area="nav">
+          <NavBar></NavBar>
+        </GridItem>
+        <Show above="lg">
+          <GridItem area="aside" bg="gold">
+            aside
+          </GridItem>
+        </Show>
+        <GridItem area="main" bg="dodgerblue">
+          main
+        </GridItem>
+      </Grid>
+    </>
+  );
 }
 
-export default App
+export default App;
