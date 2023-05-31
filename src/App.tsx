@@ -18,6 +18,7 @@ import SortSelector from "./Components/SortSelector";
 function App() {
   const [selectedGenre,setSelectedGenre]=useState<Genre |null>(null);
   const [selectedPlatform,setSelectedPlatform]=useState<Platform |null>(null);
+  const [selectedSort,setSelectedSort]=useState(String);
 
   return (
     <>
@@ -40,8 +41,8 @@ function App() {
         </Show>
         <GridItem area="main">
           <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform)=>setSelectedPlatform(platform)}></PlatformSelector>
-          <SortSelector></SortSelector>
-          <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/>
+          <SortSelector selectedSort={selectedSort} onSelectSortOrder={(selectedSort)=>setSelectedSort(selectedSort)}></SortSelector>
+          <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre} selectedSort={selectedSort}/>
         </GridItem>
       </Grid>
     </>
