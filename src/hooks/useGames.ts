@@ -15,9 +15,9 @@ export interface Platform {
   name: string;
   slug: string;
 }
-const useGames = (selectedGenre: Genre | null, selectedPlatform:Platform|null, selectedSort:string) =>
-  useData<Game>("/games", { params: { genres: selectedGenre?.id , platforms: selectedPlatform?.id,ordering:selectedSort} }, [
-    selectedGenre?.id,selectedPlatform?.id,selectedSort
+const useGames = (selectedGenre: Genre | null, selectedPlatform:Platform|null, selectedSort:string,searchText:string) =>
+  useData<Game>("/games", { params: { genres: selectedGenre?.id , platforms: selectedPlatform?.id,ordering:selectedSort,search: searchText} }, [
+    selectedGenre?.id,selectedPlatform?.id,selectedSort,searchText
   ]);
 
 export default useGames;
