@@ -12,16 +12,24 @@ import GenreList from "./Components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./Components/PlatformSelector";
-import { Platform } from "./hooks/useGames";
+import { Platform } from "./hooks/usePlatforms";
 import SortSelector from "./Components/SortSelector";
 import GameHeading from "./Components/GameHeading";
 
-function App() {
-  const [selectedGenre,setSelectedGenre]=useState<Genre |null>(null);
-  const [selectedPlatform,setSelectedPlatform]=useState<Platform |null>(null);
-  const [selectedSort,setSelectedSort]=useState(String);
-  const [searchText,setSearchText]=useState(String);
+export interface GameQuery{
+  genre:Genre|null;
+  platform:Platform|null;
+  sort:string;
+  search:string;
+}
 
+function App() {
+  // const [selectedGenre,setSelectedGenre]=useState<Genre |null>(null);
+  // const [selectedPlatform,setSelectedPlatform]=useState<Platform |null>(null);
+  // const [selectedSort,setSelectedSort]=useState(String);
+  // const [searchText,setSearchText]=useState(String);
+
+  const [gameQuery,setGameQuery]=useState<GameQuery>({}as GameQuery)
   return (
     <>
       <Grid
@@ -34,18 +42,18 @@ function App() {
         }
       >
         <GridItem area="nav">
-          <NavBar onSearch={(searchText)=>setSearchText(searchText)}></NavBar>
+          <NavBar onSearch={(search)=>setGameQuery({...gameQuery,search})}></NavBar>
         </GridItem>
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
-          <GenreList selectedGenre={selectedGenre} onSelectGenre={(genre)=>setSelectedGenre(genre)}></GenreList>
+          <GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre)=>setGameQuery({...gameQuery,genre})}></GenreList>
           </GridItem>
         </Show>
         <GridItem area="main">
-          <GameHeading selectedGenre={selectedGenre}  selectedPlatform={selectedPlatform} ></GameHeading>
-          <PlatformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform)=>setSelectedPlatform(platform)}></PlatformSelector>
-          <SortSelector selectedSort={selectedSort} onSelectSortOrder={(selectedSort)=>setSelectedSort(selectedSort)}></SortSelector>
-          <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre} selectedSort={selectedSort} searchText={searchText}/>
+          <GameHeading selectedGenre={gameQuery.genre}  selectedPlatform={gameQuery.platform} ></GameHeading>
+          <PlatformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={(platform)=>setGameQuery({...gameQuery,platform})}></PlatformSelector>
+          <SortSelector selectedSort={gameQuery.sort} onSelectSortOrder={(sort)=>setGameQuery({...gameQuery,sort})}></SortSelector>
+          <GameGrid gameQuery={gameQuery} />
         </GridItem>
       </Grid>
     </>
