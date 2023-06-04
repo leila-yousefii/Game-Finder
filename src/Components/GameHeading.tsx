@@ -1,6 +1,6 @@
 import { Heading } from '@chakra-ui/react'
-import React from 'react'
-import { Platform } from '../hooks/useGames';
+
+import { Platform } from '../hooks/usePlatforms';
 import { Genre } from '../hooks/useGenres';
 
 interface Props{
