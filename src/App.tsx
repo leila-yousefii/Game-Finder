@@ -15,9 +15,10 @@ import { Platform } from "./hooks/usePlatforms";
 import SortSelector from "./Components/SortSelector";
 import GameHeading from "./Components/GameHeading";
 
+
 export interface GameQuery{
-  genre:Genre|null;
-  platform:Platform|null;
+  genreId:number |undefined;
+  platformId:number|undefined;
   sort:string;
   search:string;
 }
@@ -45,12 +46,12 @@ function App() {
         </GridItem>
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
-          <GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre)=>setGameQuery({...gameQuery,genre})}></GenreList>
+          <GenreList selectedGenreId={gameQuery.genreId} onSelectGenre={(genre)=>setGameQuery({...gameQuery,genreId:genre.id})}></GenreList>
           </GridItem>
         </Show>
         <GridItem area="main">
-          <GameHeading selectedGenre={gameQuery.genre}  selectedPlatform={gameQuery.platform} ></GameHeading>
-          <PlatformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={(platform)=>setGameQuery({...gameQuery,platform})}></PlatformSelector>
+          <GameHeading gameQuery={gameQuery}   ></GameHeading>
+          <PlatformSelector selectedPlatformId={gameQuery.platformId} onSelectPlatform={(platform)=>setGameQuery({...gameQuery,platformId:platform.id})}></PlatformSelector>
           <SortSelector selectedSort={gameQuery.sort} onSelectSortOrder={(sort)=>setGameQuery({...gameQuery,sort})}></SortSelector>
           <GameGrid gameQuery={gameQuery} />
         </GridItem>
