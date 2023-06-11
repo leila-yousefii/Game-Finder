@@ -4,6 +4,7 @@ import { Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import ExpandableText from "./ExpandableText";
 import DefinitionItem from "./DefinitionItem";
 import CriticScore from "./CriticScore";
+import GameTrailer from "./GameTrailer";
 
 
 const GameDetailPage = () => {
@@ -26,7 +27,9 @@ const GameDetailPage = () => {
 </DefinitionItem>
 <DefinitionItem term='Genres'>{game.genres.map(genre=><Text key={genre.id}>{genre.name}</Text>)}</DefinitionItem>
 <DefinitionItem term='Publishers'>{game.publishers.map(publisher=><Text key={publisher.id}>{publisher.name}</Text>)}</DefinitionItem>
-  </SimpleGrid>  </div>
+  </SimpleGrid>
+  
+  <GameTrailer gameId={game.id}></GameTrailer>  </div>
   )
 }
 
