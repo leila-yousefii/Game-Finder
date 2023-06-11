@@ -5,6 +5,7 @@ import ExpandableText from "./ExpandableText";
 import DefinitionItem from "./DefinitionItem";
 import CriticScore from "./CriticScore";
 import GameTrailer from "./GameTrailer";
+import GameScreenshots from "./GameScreenshots";
 
 
 const GameDetailPage = () => {
@@ -29,7 +30,9 @@ const GameDetailPage = () => {
 <DefinitionItem term='Publishers'>{game.publishers.map(publisher=><Text key={publisher.id}>{publisher.name}</Text>)}</DefinitionItem>
   </SimpleGrid>
   
-  <GameTrailer gameId={game.id}></GameTrailer>  </div>
+  <GameTrailer gameId={game.id}></GameTrailer> 
+  <GameScreenshots gameId={game.id}></GameScreenshots>
+   </div>
   )
 }
 
